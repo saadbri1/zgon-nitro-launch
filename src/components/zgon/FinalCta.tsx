@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { ZGON_SOCIAL } from "@/lib/zgon-social";
 
 export function FinalCta() {
   return (
@@ -51,10 +52,12 @@ export function FinalCta() {
           transition={{ delay: 0.6 }}
           className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a href="https://twitter.com/ZGONCOIN" className="btn-zgon text-base py-4 px-8">
-            Follow @ZGONCOIN →
+          <a href={ZGON_SOCIAL.twitter} target="_blank" rel="noreferrer" className="btn-zgon text-base py-4 px-8">
+            Follow {ZGON_SOCIAL.twitterHandle} →
           </a>
-          <a href="#top" className="btn-ghost">Back to top</a>
+          <a href={ZGON_SOCIAL.telegramChannel} target="_blank" rel="noreferrer" className="btn-ghost">
+            Join Telegram
+          </a>
         </motion.div>
       </div>
     </section>

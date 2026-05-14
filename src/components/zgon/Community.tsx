@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { SectionLabel } from "./SectionLabel";
+import { ZGON_SOCIAL } from "@/lib/zgon-social";
 
 const socials = [
-  { name: "Twitter", handle: "@ZGONCOIN", count: 12847, color: "var(--zgon-lime)" },
-  { name: "Telegram", handle: "t.me/zgon", count: 8421, color: "var(--zgon-blue)" },
-  { name: "Discord", handle: "discord.gg/zgon", count: 5392, color: "var(--zgon-purple)" },
+  { name: "Twitter / X",    handle: ZGON_SOCIAL.twitterHandle,            count: 12847, color: "var(--zgon-lime)",   href: ZGON_SOCIAL.twitter,         cta: "Follow on X" },
+  { name: "Telegram Channel", handle: ZGON_SOCIAL.telegramChannelHandle,  count: 8421,  color: "var(--zgon-blue)",   href: ZGON_SOCIAL.telegramChannel, cta: "Join Channel" },
+  { name: "Telegram Chat",  handle: ZGON_SOCIAL.telegramChatHandle,        count: 5392,  color: "var(--zgon-purple)", href: ZGON_SOCIAL.telegramChat,    cta: "Enter War Room" },
 ];
 
 const feed = [
@@ -50,7 +51,9 @@ export function Community() {
           {socials.map((s, i) => (
             <motion.a
               key={s.name}
-              href="#"
+              href={s.href}
+              target="_blank"
+              rel="noreferrer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -71,8 +74,8 @@ export function Community() {
                 </div>
                 <div className="mt-1 text-xs font-mono text-[var(--zgon-muted)]">members live</div>
                 <div className="mt-6 flex items-center justify-between border-t border-white/5 pt-4">
-                  <span className="font-mono text-xs text-[var(--zgon-text)]">{s.handle}</span>
-                  <span className="text-[var(--zgon-lime)] group-hover:translate-x-1 transition-transform">→</span>
+                  <span className="font-mono text-xs text-[var(--zgon-text)] truncate pr-2">{s.handle}</span>
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--zgon-lime)] group-hover:translate-x-1 transition-transform shrink-0">{s.cta} →</span>
                 </div>
               </div>
             </motion.a>
