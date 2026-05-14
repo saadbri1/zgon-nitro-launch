@@ -1,11 +1,14 @@
 import { motion } from "framer-motion";
 import { ZgonLogo } from "./Logo";
+import { ZGON_SOCIAL } from "@/lib/zgon-social";
 
 const links = [
   { label: "About", href: "#about" },
+  { label: "Why", href: "#why" },
   { label: "Tokenomics", href: "#tokenomics" },
   { label: "Farming", href: "#farming" },
   { label: "Roadmap", href: "#roadmap" },
+  { label: "War Room", href: "#warroom" },
   { label: "Community", href: "#community" },
 ];
 
@@ -35,9 +38,17 @@ export function Nav() {
             </a>
           ))}
         </nav>
-        <a href="#cta" className="btn-zgon text-xs">
-          Join <span aria-hidden>→</span>
-        </a>
+        <div className="flex items-center gap-2">
+          <a href={ZGON_SOCIAL.twitter} target="_blank" rel="noreferrer" aria-label="Twitter / X" className="hidden sm:inline-flex w-9 h-9 items-center justify-center border border-white/10 hover:border-[var(--zgon-lime)] hover:text-[var(--zgon-lime)] text-[var(--zgon-muted)] transition-colors">
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2H21l-6.52 7.45L22 22h-6.797l-5.314-6.94L3.8 22H1l7-8L1 2h6.96l4.79 6.34L18.244 2zm-2.382 18.21h1.86L8.21 3.69H6.21l9.652 16.52z"/></svg>
+          </a>
+          <a href={ZGON_SOCIAL.telegramChannel} target="_blank" rel="noreferrer" aria-label="Telegram Channel" className="hidden sm:inline-flex w-9 h-9 items-center justify-center border border-white/10 hover:border-[var(--zgon-lime)] hover:text-[var(--zgon-lime)] text-[var(--zgon-muted)] transition-colors">
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M9.04 15.36 8.86 19c.4 0 .58-.17.79-.38l1.9-1.81 3.94 2.88c.72.4 1.24.19 1.43-.66l2.6-12.18c.25-1.08-.39-1.5-1.1-1.24L3.3 11.04c-1.05.4-1.04.99-.18 1.26l3.93 1.23 9.13-5.75c.43-.27.83-.12.5.16"/></svg>
+          </a>
+          <a href={ZGON_SOCIAL.telegramChannel} target="_blank" rel="noreferrer" className="btn-zgon text-xs">
+            Join <span aria-hidden>→</span>
+          </a>
+        </div>
       </div>
     </motion.header>
   );
