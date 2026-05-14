@@ -1,5 +1,21 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { ZGON_SOCIAL } from "@/lib/zgon-social";
+
+const FLOAT_WORDS = [
+  { t: "EARLY",    x: "6%",  y: "22%", d: 0,   s: "text-5xl md:text-7xl" },
+  { t: "FAST",     x: "82%", y: "18%", d: 0.4, s: "text-4xl md:text-6xl" },
+  { t: "SOLANA",   x: "10%", y: "72%", d: 0.8, s: "text-3xl md:text-5xl" },
+  { t: "MOVEMENT", x: "74%", y: "78%", d: 1.2, s: "text-3xl md:text-5xl" },
+  { t: "ZGON",     x: "88%", y: "50%", d: 1.6, s: "text-2xl md:text-4xl" },
+];
+
+const LIVE_CARDS = [
+  { t: "New member joined Telegram", h: "+1", side: "left",  top: "30%", delay: 0 },
+  { t: "Early believer entered the movement", h: "alpha", side: "right", top: "40%", delay: 1.2 },
+  { t: "Wallets watching ZGON", h: "+248", side: "left",  top: "62%", delay: 2.4 },
+  { t: "Community growing fast", h: "live", side: "right", top: "70%", delay: 3.6 },
+];
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -30,38 +46,65 @@ export function Hero() {
       {/* grid */}
       <div className="absolute inset-0 zgon-grid-bg [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
 
+      {/* energy rings */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+        {[0, 1, 2].map((i) => (
+          <span
+            key={i}
+            className="absolute left-1/2 top-1/2 w-[420px] h-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--zgon-lime)]/30 animate-ring"
+            style={{ animationDelay: `${i * 1.2}s` }}
+          />
+        ))}
+      </div>
+
       {/* speed streaks */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(8)].map((_, i) => (
+        {[...Array(14)].map((_, i) => (
           <div
             key={i}
             className="absolute h-px bg-gradient-to-r from-transparent via-[var(--zgon-lime)] to-transparent animate-streak"
             style={{
-              top: `${10 + i * 11}%`,
-              width: "60%",
-              opacity: 0.2 + (i % 3) * 0.15,
-              animationDelay: `${i * 0.6}s`,
-              animationDuration: `${3 + (i % 4)}s`,
+              top: `${(i * 7) % 100}%`,
+              width: "70%",
+              opacity: 0.15 + (i % 3) * 0.18,
+              animationDelay: `${i * 0.35}s`,
+              animationDuration: `${2 + (i % 4)}s`,
             }}
           />
         ))}
       </div>
 
+      {/* floating ambient words */}
+      <div className="absolute inset-0 pointer-events-none hidden sm:block">
+        {FLOAT_WORDS.map((w) => (
+          <motion.div
+            key={w.t}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: [0, 0.18, 0.08, 0.18], y: [20, -10, 0, -10] }}
+            transition={{ duration: 8, delay: w.d, repeat: Infinity, ease: "easeInOut" }}
+            className={`absolute font-display font-black ${w.s} tracking-tighter text-[var(--zgon-lime)] select-none`}
+            style={{ left: w.x, top: w.y, textShadow: "0 0 40px rgba(217,255,0,0.4)" }}
+          >
+            {w.t}
+          </motion.div>
+        ))}
+      </div>
+
       {/* particles */}
       <div className="absolute inset-0 pointer-events-none">
-        {[...Array(40)].map((_, i) => (
+        {[...Array(60)].map((_, i) => (
           <motion.span
             key={i}
             className="absolute w-1 h-1 rounded-full bg-[var(--zgon-lime)]"
             initial={{ opacity: 0 }}
             animate={{
               opacity: [0, 0.8, 0],
-              y: [0, -30, -60],
+              y: [0, -40, -80],
             }}
             transition={{
-              duration: 4 + (i % 5),
+              duration: 3 + (i % 5),
               repeat: Infinity,
-              delay: (i % 10) * 0.4,
+              delay: (i % 10) * 0.3,
             }}
             style={{
               left: `${(i * 37) % 100}%`,
@@ -76,6 +119,27 @@ export function Hero() {
       <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full opacity-30 blur-3xl"
         style={{ background: "radial-gradient(circle, var(--zgon-purple), transparent 60%)" }}
       />
+
+      {/* live social proof cards */}
+      <div className="absolute inset-0 pointer-events-none hidden md:block">
+        {LIVE_CARDS.map((c, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, x: c.side === "left" ? -40 : 40 }}
+            animate={{ opacity: [0, 1, 1, 0], x: c.side === "left" ? [-40, 0, 0, -10] : [40, 0, 0, 10] }}
+            transition={{ duration: 6, delay: c.delay, repeat: Infinity, repeatDelay: 6, ease: "easeOut" }}
+            className="absolute glass cut-corners pl-3 pr-4 py-2.5 flex items-center gap-3 max-w-[260px]"
+            style={{
+              [c.side]: "3%",
+              top: c.top,
+            } as React.CSSProperties}
+          >
+            <span className="w-2 h-2 rounded-full bg-[var(--zgon-lime)] animate-pulse-glow shrink-0" />
+            <span className="font-mono text-[10px] uppercase tracking-widest text-[var(--zgon-text)]">{c.t}</span>
+            <span className="font-mono text-[10px] text-[var(--zgon-lime)] ml-auto shrink-0">{c.h}</span>
+          </motion.div>
+        ))}
+      </div>
 
       {/* center content */}
       <div className="relative z-10 text-center px-6 max-w-6xl">
@@ -116,8 +180,17 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.9 }}
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a href="#cta" className="btn-zgon">Join The Movement →</a>
-          <a href="#community" className="btn-ghost">Enter Telegram</a>
+          <a href={ZGON_SOCIAL.telegramChannel} target="_blank" rel="noreferrer" className="btn-zgon">Join Telegram →</a>
+          <a href={ZGON_SOCIAL.twitter} target="_blank" rel="noreferrer" className="btn-ghost">Follow on X</a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4, duration: 1 }}
+          className="mt-6 font-mono text-[10px] uppercase tracking-[0.4em] text-[var(--zgon-muted)] caret"
+        >
+          You are still early
         </motion.div>
 
         {/* live stats strip */}
@@ -143,6 +216,19 @@ export function Hero() {
       {/* scroll hint */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-mono uppercase tracking-[0.4em] text-[var(--zgon-muted)] animate-pulse-glow">
         Scroll ↓
+      </div>
+
+      {/* bottom marquee */}
+      <div className="absolute bottom-0 left-0 right-0 border-y border-white/5 bg-black/40 backdrop-blur overflow-hidden py-2">
+        <div className="flex animate-marquee whitespace-nowrap font-display text-xs md:text-sm tracking-[0.3em] text-[var(--zgon-muted)]">
+          {Array.from({ length: 2 }).map((_, k) => (
+            <div key={k} className="flex shrink-0 items-center gap-8 px-8">
+              {["TOO FAST.", "TOO ZGON.", "BUILT ON SOLANA", "BEFORE THE HYPE", "EARLY BELIEVERS ONLY", "PHASE 01 LIVE", "★", "CRYPTO TWITTER IS WATCHING", "★"].map((w, i) => (
+                <span key={i} className={i % 3 === 0 ? "text-[var(--zgon-lime)]" : ""}>{w}</span>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
