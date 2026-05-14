@@ -6,6 +6,9 @@ import { About } from "@/components/zgon/About";
 import { Tokenomics } from "@/components/zgon/Tokenomics";
 import { Farming } from "@/components/zgon/Farming";
 import { Roadmap } from "@/components/zgon/Roadmap";
+import { WhyWatching } from "@/components/zgon/WhyWatching";
+import { TwitterShowcase } from "@/components/zgon/TwitterShowcase";
+import { TelegramWarRoom } from "@/components/zgon/TelegramWarRoom";
 import { Community } from "@/components/zgon/Community";
 import { FinalCta } from "@/components/zgon/FinalCta";
 import { Footer } from "@/components/zgon/Footer";
@@ -24,6 +27,9 @@ function Index() {
       <Tokenomics />
       <Farming />
       <Roadmap />
+      <WhyWatching />
+      <TwitterShowcase />
+      <TelegramWarRoom />
       <Community />
       <FinalCta />
       <Footer />
