@@ -1,26 +1,32 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Loader } from "@/components/zgon/Loader";
+import { Nav } from "@/components/zgon/Nav";
+import { Hero } from "@/components/zgon/Hero";
+import { About } from "@/components/zgon/About";
+import { Tokenomics } from "@/components/zgon/Tokenomics";
+import { Farming } from "@/components/zgon/Farming";
+import { Roadmap } from "@/components/zgon/Roadmap";
+import { Community } from "@/components/zgon/Community";
+import { FinalCta } from "@/components/zgon/FinalCta";
+import { Footer } from "@/components/zgon/Footer";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
-
 function Index() {
-  return <PlaceholderIndex />;
+  return (
+    <main className="bg-[var(--zgon-bg)] text-[var(--zgon-text)] min-h-screen">
+      <Loader />
+      <Nav />
+      <Hero />
+      <About />
+      <Tokenomics />
+      <Farming />
+      <Roadmap />
+      <Community />
+      <FinalCta />
+      <Footer />
+    </main>
+  );
 }
